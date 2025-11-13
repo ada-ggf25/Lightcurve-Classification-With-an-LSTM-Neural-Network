@@ -128,13 +128,15 @@
 \bibitem [{\citenamefont {{Santos}}(2022)}]{Gabriel_2022}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.~G. P.~R.}\
-  \bibnamefont {{Santos}}},\ }\emph {\bibinfo {title} {Uso de redes neurais
-  LSTM para predição de séries temporais de demanda de vendas}},\ \href@noop
-  {} {Ph.D. thesis},\ \bibinfo  {school} {universidade federal de São Paulo},
-  \bibinfo {address} {Vitória ES} (\bibinfo {year} {2022})\BibitemShut
-  {NoStop}%
-\bibitem [{col(2015)}]{colah}%
+  \bibnamefont {{Santos}}},\ }\emph {\bibinfo {title} {Use of LSTM Neural
+  Networks for Time Series Sales Demand Prediction}},\ \href
+  {https://repositorio.unifesp.br/handle/11600/63496} {Ph.D. thesis},\ \bibinfo
+   {school} {Universidade Federal de São Paulo}, \bibinfo {address} {Vitória,
+  ES, Brazil} (\bibinfo {year} {2022})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Olah}(2015)}]{colah}%
   \BibitemOpen
-  \href@noop {} {\bibinfo {title} {Understanding lstm networks}} (\bibinfo
-  {year} {2015})\BibitemShut {NoStop}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
+  {Olah}},\ }\href {https://colah.github.io/posts/2015-08-Understanding-LSTMs/}
+  {\bibinfo {title} {Understanding lstm networks}} (\bibinfo {year}
+  {2015})\BibitemShut {NoStop}%
 \end{thebibliography}%

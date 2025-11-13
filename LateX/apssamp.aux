@@ -1,6 +1,23 @@
 \relax 
+\providecommand\hyper@newdestlabel[2]{}
 \providecommand\babel@aux[2]{}
 \@nameuse{bbl@beforestart}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{Djorgovski_2022}
 \citation{kaggle}
 \citation{Russel_1912}
@@ -12,78 +29,50 @@
 \citation{colah}
 \citation{colah}
 \citation{kaggle}
-\newlabel{FirstPage}{{}{1}{}{}{}}
-\@writefile{toc}{\contentsline {title}{Classification of transient object light curves\\using LSTM neural networks}{1}{}}
-\@writefile{toc}{\contentsline {abstract}{Abstract}{1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Functioning of an RNN network. \cite  {colah}\relax }}{1}{}}
+\newlabel{FirstPage}{{}{1}{}{section*.1}{}}
+\@writefile{toc}{\contentsline {title}{Classification of transient object light curves\\using LSTM neural networks}{1}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {abstract}{Abstract}{1}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {II}Methodology}{1}{section*.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Functioning of an RNN network. \cite  {colah}\relax }}{2}{figure.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:RNN}{{1}{1}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Methodology}{1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Functioning of an LSTM network. \cite  {colah}\relax }}{2}{}}
-\newlabel{fig:lstm}{{2}{2}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Table exemplifying the dataset.\relax }}{2}{}}
-\newlabel{tab:conjunto-dados-ex}{{I}{2}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Preprocessing}{2}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Distribution of measurements by original classes.}}}{2}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Distribution of measurements by generalized classes.}}}{2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Table with the fourteen original classes and their generalized classes.\relax }}{2}{}}
-\newlabel{tab:classes-generalizadas}{{II}{2}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \relax }}{2}{}}
-\newlabel{fig:classes}{{3}{2}{}{}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Distribution of the number of measurements per object.}}}{3}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Distribution of the number of measurements per object after padding.}}}{3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \relax }}{3}{}}
-\newlabel{fig:padding}{{4}{3}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Neural Network}{3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {III}Results and Discussion}{3}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {ROC curve for our classification model. The Periodic and S-Like classes show satisfactory results, however the same cannot be said for the Fast and Long classes.}}}{3}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Precision-Recall curve for our classification model. The Periodic and S-Like classes show satisfactory results, however we notice that the model does not seem to correctly classify Non-Periodic curves. }}}{3}{}}
-\citation{*}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Neural network used in the classification process. The LSTM network is bidirectional because equal importance must be given to past and future data; the Mask layer serves to attenuate the noise effects that padding can cause\relax }}{4}{}}
-\newlabel{fig:rede}{{5}{4}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces \relax }}{4}{}}
-\newlabel{fig:RoC_Recall}{{6}{4}{}{}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Confusion matrix for the complete test set.}}}{4}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Confusion matrix for the test set with five days ahead. The results worsen compared to the complete test set.}}}{4}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Confusion matrix for the test set with data ten days ahead. The results worsen compared to the sets with ten and five days.}}}{4}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Confusion matrix for the test set with data twenty days ahead. The network now confuses more classes with S-Like type objects.}}}{4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Conclusion}{4}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Example of a light curve of an object from the S-Like class. The values in the legend indicate the filter used and the emission spectrum.}}}{4}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Example of a light curve of an object from the Fast class. The values in the legend indicate the filter used and the emission spectrum.}}}{4}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Example of a light curve of an object from the Long class. The values in the legend indicate the filter used and the emission spectrum.}}}{4}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Example of a light curve of an object from the Periodic class. The values in the legend indicate the filter used and the emission spectrum.}}}{4}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {Example of a light curve of an object from the Non-Periodic class. The values in the legend indicate the filter used and the emission spectrum.}}}{4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Code}{4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {}Acknowledgments}{5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces \relax }}{6}{}}
-\newlabel{fig:matrizes}{{7}{6}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces \relax }}{7}{}}
-\newlabel{fig:curvas}{{8}{7}{}{}{}}
-\bibdata{apssampNotes,apssamp}
-\@writefile{toc}{\appendix }
-\@writefile{toc}{\contentsline {section}{\numberline {A}ROC and Precision-Recall Curves for 5, 10, and 20 Day Data}{8}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Precision-Recall curve for the dataset with a temporal advance of 5 days.}}}{8}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {ROC curve for the dataset with a temporal advance of 5 days.}}}{8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces \relax }}{8}{}}
-\newlabel{fig:roc e precision_5}{{9}{8}{}{}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Precision-Recall curve for the dataset with a temporal advance of 10 days.}}}{8}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {ROC curve for the dataset with a temporal advance of 10 days.}}}{8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces \relax }}{8}{}}
-\newlabel{fig:roc e precision_10}{{10}{8}{}{}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Precision-Recall curve for the dataset with a temporal advance of 20 days.}}}{8}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {ROC curve for the dataset with a temporal advance of 20 days.}}}{8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces \relax }}{9}{}}
-\newlabel{fig:roc e precision_20}{{11}{9}{}{}{}}
-\bibcite{Djorgovski_2022}{{1}{2022}{{Djorgovski\ \emph  {et~al.}}}{{Djorgovski, Mahabal, Graham, Polsterer,\ and\ Krone-Martins}}}
-\bibcite{kaggle}{{2}{2018}{{kag}}{{}}}
-\bibcite{Russel_1912}{{3}{1912}{{{Russell}}}{{}}}
-\bibcite{PLAsTiCC}{{4}{2018}{{{The PLAsTiCC Team}\ \emph  {et~al.}}}{{{The PLAsTiCC Team}, Allam, Bahmanyar, Biswas, Dai, Galbany, Hložek, Ishida, Jha, Jones, Kessler, Lochner, Mahabal, Malz, Mandel, Martínez-Galarza, McEwen, Muthukrishna, Narayan, Peiris, Peters, Ponder, Setzer, Collaboration, Transients,\ and\ Collaboration}}}
-\bibcite{Tanvir_2005}{{5}{2005}{{Tanvir\ \emph  {et~al.}}}{{Tanvir, Hendry, Watkins, Kanbur, Berdnikov,\ and\ Ngeow}}}
-\bibcite{Gabriel_2022}{{6}{2022}{{{Santos}}}{{}}}
-\bibcite{colah}{{7}{2015}{{col}}{{}}}
-\bibstyle{apsrev4-2}
-\@writefile{toc}{\contentsline {section}{\numberline {}References}{10}{}}
-\newlabel{LastBibItem}{{7}{10}{}{}{}}
-\newlabel{LastPage}{{}{10}{}{}{}}
-\gdef \@abspage@last{10}
+\newlabel{fig:RNN}{{1}{2}{Functioning of an RNN network. \cite {colah}\relax }{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Functioning of an LSTM network. \cite  {colah}\relax }}{2}{figure.2}\protected@file@percent }
+\newlabel{fig:lstm}{{2}{2}{Functioning of an LSTM network. \cite {colah}\relax }{figure.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Table exemplifying the dataset.\relax }}{2}{table.caption.5}\protected@file@percent }
+\newlabel{tab:conjunto-dados-ex}{{I}{2}{Table exemplifying the dataset.\relax }{table.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Preprocessing}{2}{section*.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Distribution of measurements by original classes.}}}{2}{figure.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Distribution of measurements by generalized classes.}}}{2}{figure.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Table with the fourteen original classes and their generalized classes.\relax }}{2}{table.caption.7}\protected@file@percent }
+\newlabel{tab:classes-generalizadas}{{II}{2}{Table with the fourteen original classes and their generalized classes.\relax }{table.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \relax }}{2}{figure.3}\protected@file@percent }
+\newlabel{fig:classes}{{3}{2}{\relax }{figure.3}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Distribution of the number of measurements per object.}}}{3}{figure.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Distribution of the number of measurements per object after padding.}}}{3}{figure.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \relax }}{3}{figure.4}\protected@file@percent }
+\newlabel{fig:padding}{{4}{3}{\relax }{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Neural Network}{3}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Results and Discussion}{3}{section*.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {ROC curve for our classification model. The Periodic and S-Like classes show satisfactory results, however the same cannot be said for the Fast and Long classes.}}}{3}{figure.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Precision-Recall curve for our classification model. The Periodic and S-Like classes show satisfactory results, however we notice that the model does not seem to correctly classify Non-Periodic curves. }}}{3}{figure.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Neural network used in the classification process. The LSTM network is bidirectional because equal importance must be given to past and future data; the Mask layer serves to attenuate the noise effects that padding can cause\relax }}{4}{figure.5}\protected@file@percent }
+\newlabel{fig:rede}{{5}{4}{Neural network used in the classification process. The LSTM network is bidirectional because equal importance must be given to past and future data; the Mask layer serves to attenuate the noise effects that padding can cause\relax }{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces \relax }}{4}{figure.6}\protected@file@percent }
+\newlabel{fig:RoC_Recall}{{6}{4}{\relax }{figure.6}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Confusion matrix for the complete test set.}}}{4}{figure.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Confusion matrix for the test set with five days ahead. The results worsen compared to the complete test set.}}}{4}{figure.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Confusion matrix for the test set with data ten days ahead. The results worsen compared to the sets with ten and five days.}}}{4}{figure.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Confusion matrix for the test set with data twenty days ahead. The network now confuses more classes with S-Like type objects.}}}{4}{figure.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Conclusion}{4}{section*.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Example of a light curve of an object from the S-Like class. The values in the legend indicate the filter used and the emission spectrum.}}}{4}{figure.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Example of a light curve of an object from the Fast class. The values in the legend indicate the filter used and the emission spectrum.}}}{4}{figure.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Example of a light curve of an object from the Long class. The values in the legend indicate the filter used and the emission spectrum.}}}{4}{figure.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Example of a light curve of an object from the Periodic class. The values in the legend indicate the filter used and the emission spectrum.}}}{4}{figure.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {Example of a light curve of an object from the Non-Periodic class. The values in the legend indicate the filter used and the emission spectrum.}}}{4}{figure.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Code}{4}{section*.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {}Acknowledgments}{5}{section*.12}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces \relax }}{6}{figure.7}\protected@file@percent }
+\newlabel{fig:matrizes}{{7}{6}{\relax }{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces \relax }}{7}{figure.8}\protected@file@percent }
+\newlabel{fig:curvas}{{8}{7}{\relax }{fig
