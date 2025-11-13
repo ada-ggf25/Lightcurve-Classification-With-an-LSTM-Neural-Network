@@ -98,9 +98,9 @@ Fernandes, G.G.D.$^{1,3}$; Barroca, M.A.$^1$; dos Santos, M.$^1$; Oliveira, R.S.
 \section{Introduction}
 Artificial intelligence (AI) can be classified as a research area that 
 investigates ways to enable computers to perform tasks in which, until now, 
-humans have better performance. AI can manifest itself in various forms, in chatbots that can understand customer problems more quickly and provide more efficient responses, in intelligent assistants that need to analyse critical information from large free-text datasets, and in scientific applications, such as classifying and making decisions on the exponentially growing astronomical data.\cite{Djorgovski_2022}
+humans have better performance. AI can manifest itself in various forms, in chatbots that can understand customer problems more quickly and provide more efficient responses, in intelligent assistants that need to analyze critical information from large free-text datasets, and in scientific applications, such as classifying and making decisions on the exponentially growing astronomical data.\cite{Djorgovski_2022}
 
-Recently, the Large Synoptic Survey Telescope (LSST) proposed a challenge on Kaggle, a Google subsidiary website, called The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC).\cite{kaggle} This is a challenge aimed at classifying light curves, data of the observed brightness of celestial objects as a function of time, which were simulated in preparation for LSST observations. These curves are capable of revealing the presence of some phenomena, such as supernovae\cite{Russel_1912}. The LSST will revolutionise our understanding of the sky, however, this type of study is hindered by the large volume of data obtained by the telescope, making automatic analysis procedures indispensable to differentiate and classify them. In this challenge, the question was raised: How well can we classify objects in the sky that vary in brightness from simulated LSST time-series data? From this, the need arose for a data challenge to help classify these astronomical sources and describe the PLAsTiCC dataset and the Kaggle data challenge. \cite{PLAsTiCC}
+Recently, the Large Synoptic Survey Telescope (LSST) proposed a challenge on Kaggle, a Google subsidiary website, called The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC).\cite{kaggle} This is a challenge aimed at classifying light curves, data of the observed brightness of celestial objects as a function of time, which were simulated in preparation for LSST observations. These curves are capable of revealing the presence of some phenomena, such as supernovae\cite{Russel_1912}. The LSST will revolutionize our understanding of the sky, however, this type of study is hindered by the large volume of data obtained by the telescope, making automatic analysis procedures indispensable to differentiate and classify them. In this challenge, the question was raised: How well can we classify objects in the sky that vary in brightness from simulated LSST time-series data? From this, the need arose for a data challenge to help classify these astronomical sources and describe the PLAsTiCC dataset and the Kaggle data challenge. \cite{PLAsTiCC}
 
 Before the use of AI, this type of classification still depended on manual analysis. Common statistical methods such as template fitting\cite{Tanvir_2005} were used, but these are not scalable for a large volume of data. Usually, a group of experts manually eliminated obvious cases of false positives, something that by itself can take several days. Of the remaining data, each case should be reviewed by at least three experts, which can lead to disagreements about a particular case, since experts might not have the same definition for classification. For these reasons, a reliable system is necessary that repeatedly selects the most important candidates that will be manually reviewed for confirmation at a later stage.
 
@@ -220,7 +220,7 @@ Due to the padding procedure, all objects came to have 352 measurements and 5 fe
 
 Due to the padding performed, it is necessary to have a mask layer so that the arbitrary data are identified and ignored by the network. Otherwise, they would be treated as noise in the dataset.
 
-It will also be necessary to use a dense layer to perform the classification process and a GlobalMaxPooling layer to reduce the dimensions of the problem. The complete network can be visualised in figure \ref{fig:rede}.
+It will also be necessary to use a dense layer to perform the classification process and a GlobalMaxPooling layer to reduce the dimensions of the problem. The complete network can be visualized in figure \ref{fig:rede}.
 
 \begin{figure*}[ht]
     \centering
@@ -237,9 +237,9 @@ The metrics chosen for network evaluation were ROC curves, Precision-Recall curv
 
 The ROC curves obtained were mostly excellent, achieving area under the curve values for the S-Like and Periodic classes of 0.95 and 0.99, respectively. The same cannot be said for the Long class, for which a value of 0.68 was obtained. 
 
-Similarly, the values achieved for the Precision-Recall curves for the S-Like and Periodic classes obtained high area under the curve values, 0.98 and 0.89, respectively. For the Non-Periodic class, the worst result of 0.40 was obtained. All curves can be visualised in figure \ref{fig:RoC_Recall}.
+Similarly, the values achieved for the Precision-Recall curves for the S-Like and Periodic classes obtained high area under the curve values, 0.98 and 0.89, respectively. For the Non-Periodic class, the worst result of 0.40 was obtained. All curves can be visualized in figure \ref{fig:RoC_Recall}.
 
-By observing the confusion matrix, it is easier to understand what is happening. The classification of S-Like curves is done with high accuracy, and the model is still capable of distinguishing curves from the Periodic and Non-Periodic classes from the other three. However, it can be seen that the model completely fails when trying to classify Long or Fast type curves and is also unable to differentiate Periodic and Non-Periodic curves from each other. The matrix can be visualised in figure \ref{fig:matrizes} (a).
+By observing the confusion matrix, it is easier to understand what is happening. The classification of S-Like curves is done with high accuracy, and the model is still capable of distinguishing curves from the Periodic and Non-Periodic classes from the other three. However, it can be seen that the model completely fails when trying to classify Long or Fast type curves and is also unable to differentiate Periodic and Non-Periodic curves from each other. The matrix can be visualized in figure \ref{fig:matrizes} (a).
 
 \begin{figure*}[ht]
     \centering
@@ -283,15 +283,15 @@ test sets that were advanced in time; in this case, it was evaluated at five, te
 
 \section{Conclusion}
 
-The neural network developed in this project was able to classify S-Like objects and still distinguish Periodic and Non-Periodic objects from the others. Unfortunately, these results do not repeat for the Fast and Long classes, probably due to the difficult characterisation of these curves that have short-duration peaks only at the beginning or end of the measurement.
+The neural network developed in this project was able to classify S-Like objects and still distinguish Periodic and Non-Periodic objects from the others. Unfortunately, these results do not repeat for the Fast and Long classes, probably due to the difficult characterization of these curves that have short-duration peaks only at the beginning or end of the measurement.
 
 Another problem that this model presents is that it is not possible to effectively distinguish Non-Periodic objects, confusing them with Periodic objects. This result probably comes from the fact that both curves show several peaks throughout the measurement, and the model seems to attribute periodicity to measurements that are not periodic. Despite this, the network almost never identifies periodic measurements as non-periodic.
 
-Finally, unfortunately, this network loses the ability to classify any object when partial light curve data are provided and begins to confuse all objects as if they were S-Like. This is likely due to the fact that the dataset, even with generalised classes, still shows a high prevalence of the S-Like class. The network's confusion in classifying non-periodic objects, recognising them as periodic, is also noticeable.
+Finally, unfortunately, this network loses the ability to classify any object when partial light curve data are provided and begins to confuse all objects as if they were S-Like. This is likely due to the fact that the dataset, even with generalized classes, still shows a high prevalence of the S-Like class. The network's confusion in classifying non-periodic objects, recognizing them as periodic, is also noticeable.
 
 As a suggestion to correct these problems, one could consider choosing a training set that is more balanced in its class distribution. Including more Non-Periodic type objects in the network training set may be sufficient to reduce confusion with the Periodic class. 
 
-During the production of this work, one of the solutions attempted to minimise the class imbalance problem was the use of weights during network training; however, this technique did not show a significant improvement for classification.
+During the production of this work, one of the solutions attempted to minimize the class imbalance problem was the use of weights during network training; however, this technique did not show a significant improvement for classification.
 
 Regarding solving the classification issue for Fast and Long objects, it may be necessary to change the data preprocessing. For example, one could extract from the data the moments when the boolean detection variable has value 1 and use only those portions of the light curves. In this way, background data from the object would be removed, keeping only the measurements corresponding to detections. This could also help with the issue of classification with partial curve data.
 
