@@ -56,7 +56,7 @@
 %
 \title{Classification of Transient Astronomical Object Light Curves Using LSTM Neural Networks}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Authtor name %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Author name %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %
 \author{%\large
@@ -98,9 +98,9 @@ Fernandes, G.G.D.$^{1,3}$; Barroca, M.A.$^1$; dos Santos, M.$^1$; Oliveira, R.S.
 \section{Introduction}
 Artificial intelligence (AI) can be classified as a research area that 
 investigates ways to enable computers to perform tasks in which, until now, 
-humans have better performance. AI can manifest itself in various forms, in chatbots that can understand customer problems more quickly and provide more efficient responses, in intelligent assistants that need to analyze critical information from large free-text datasets, and in scientific applications, such as classifying and making decisions on the exponentially growing astronomical data.\cite{Djorgovski_2022}
+humans have better performance. AI can manifest itself in various forms, in chatbots that can understand customer problems more quickly and provide more efficient responses, in intelligent assistants that need to analyse critical information from large free-text datasets, and in scientific applications, such as classifying and making decisions on the exponentially growing astronomical data.\cite{Djorgovski_2022}
 
-Recently, the Large Synoptic Survey Telescope (LSST) proposed a challenge on the Kaggle website, a Google subsidiary, called The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC).\cite{kaggle} This is a challenge aimed at classifying light curves, data of the observed brightness of celestial objects as a function of time, which were simulated in preparation for LSST observations. These curves are capable of revealing the presence of some phenomena, such as supernovae\cite{Russel_1912}. The LSST will revolutionise our understanding of the sky, however this type of study is hindered by the large volume of data obtained by the telescope, making automatic analysis procedures indispensable to differentiate and classify them. In this challenge, the question was raised: How well can we classify objects in the sky that vary in brightness from simulated LSST time-series data? From this, the need arose for a data challenge to help classify these astronomical sources and describe the PLAsTiCC dataset and the Kaggle data challenge. \cite{PLAsTiCC}
+Recently, the Large Synoptic Survey Telescope (LSST) proposed a challenge on Kaggle, a Google subsidiary website, called The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC).\cite{kaggle} This is a challenge aimed at classifying light curves, data of the observed brightness of celestial objects as a function of time, which were simulated in preparation for LSST observations. These curves are capable of revealing the presence of some phenomena, such as supernovae\cite{Russel_1912}. The LSST will revolutionise our understanding of the sky, however, this type of study is hindered by the large volume of data obtained by the telescope, making automatic analysis procedures indispensable to differentiate and classify them. In this challenge, the question was raised: How well can we classify objects in the sky that vary in brightness from simulated LSST time-series data? From this, the need arose for a data challenge to help classify these astronomical sources and describe the PLAsTiCC dataset and the Kaggle data challenge. \cite{PLAsTiCC}
 
 Before the use of AI, this type of classification still depended on manual analysis. Common statistical methods such as template fitting\cite{Tanvir_2005} were used, but these are not scalable for a large volume of data. Usually, a group of experts manually eliminated obvious cases of false positives, something that by itself can take several days. Of the remaining data, each case should be reviewed by at least three experts, which can lead to disagreements about a particular case, since experts might not have the same definition for classification. For these reasons, a reliable system is necessary that repeatedly selects the most important candidates that will be manually reviewed for confirmation at a later stage.
 
@@ -108,7 +108,7 @@ Before the use of AI, this type of classification still depended on manual analy
 
 \subsection{Long Short-Term Memory Neural Networks}
 
-Since light curves are a function that varies with time, one of the possible ways to solve the PLAsTiCC problem is to use a Long Short-Term Memory (LSTM) Neural Network. The LSTM is a recurrent neural network (RNN) architecture, developed by Hochreiter and Schmidhuber in 1997. Recurrent networks have the characteristic of making some information persist in the network through a loop at arbitrary intervals. The RNN by definition has a simpler repetition structure than LSTMs, as there is only a single tanh layer, figure \ref{fig:RNN}, while LSTMs have a chain structure that contains four neural network layers and different memory blocks called cells as shown in figure \ref{fig:lstm}. Thus, LSTMs are well suited for classifying, processing, and predicting time series with time intervals of unknown duration. \cite{Gabriel_2022}
+Since light curves are a function that varies with time, one of the possible ways to solve the PLAsTiCC problem is to use a Long Short-Term Memory (LSTM) Neural Network. The LSTM is a recurrent neural network (RNN) architecture, developed by Hochreiter and Schmidhuber in 1997. Recurrent networks have the characteristic of making some information persist in the network through a loop at arbitrary intervals. The RNN by definition has a simpler repetition structure than LSTMs, as there is only a single tanh layer, as shown in figure \ref{fig:RNN}, while LSTMs have a chain structure that contains four neural network layers and different memory blocks called cells as shown in figure \ref{fig:lstm}. Thus, LSTMs are well suited for classifying, processing, and predicting time series with time intervals of unknown duration. \cite{Gabriel_2022}
 
 \begin{figure*}[ht]
     \centering
@@ -156,7 +156,7 @@ The data are tabular and consist of flux measurement information, measurement er
 
 \subsection{Preprocessing}
 
-Initially, the provided data had fourteen categories, however due to the discrepancy in the amount of data per category, the data were reorganized into five categories according to Table \ref{tab:classes-generalizadas}. Examples of each of the classes can be seen in figure \ref{fig:curvas}. The distribution by original classes and generalized classes can be seen in figure \ref{fig:classes}.
+Initially, the provided data had fourteen categories, however, due to the discrepancy in the amount of data per category, the data were reorganized into five categories according to Table \ref{tab:classes-generalizadas}. Examples of each of the classes can be seen in figure \ref{fig:curvas}. The distribution by original classes and generalized classes can be seen in figure \ref{fig:classes}.
 
 \begin{center}
 \begin{minipage}{\columnwidth}
@@ -180,7 +180,7 @@ Initially, the provided data had fourteen categories, however due to the discrep
 67 & SNIa-91bg         & S-Like       & 0 \\\hline
 88 & AGN               & Non-Periodic & 4 \\\hline
 90 & SNIa              & S-Like       & 0 \\\hline
-92 & RR lyrae          & Periodic     & 3 \\\hline
+92 & RR Lyrae          & Periodic     & 3 \\\hline
 95 & SLSN-I            & Long         & 2 \\\hline
 \end{tabular}}
 \captionof{table}{Table with the fourteen original classes and their generalized classes.}
@@ -214,7 +214,7 @@ Finally, this project is interested in verifying the ability to classify objects
 
 \subsection{Neural Network}
 
-Since the provided data are time series, the use of an LSTM network was chosen. The network will be bidirectional because previous measurements are as relevant as subsequent measurements. It was also decided that each of the columns in the dataset exemplified in table \ref{tab:conjunto-dados-ex} will be treated as a feature of the object.
+Since the provided data are time series, the use of an LSTM network was chosen. The network will be bidirectional because previous measurements are as relevant as subsequent measurements. It was also decided that each of the columns in the dataset exemplified in Table \ref{tab:conjunto-dados-ex} will be treated as a feature of the object.
 
 Due to the padding procedure, all objects came to have 352 measurements and 5 features. This means that the input dimensions of the network will be 352x5 and the output will be a probability distribution in a tensor of size five, since we have 5 generalized classes.
 
@@ -259,7 +259,7 @@ test sets that were advanced in time; in this case, it was evaluated at five, te
     \hfill
     \subfigure[Confusion matrix for the test set with five days ahead. The results worsen compared to the complete test set.]{\includegraphics[width=0.49\textwidth]{figures/matrix_5.png}}
     \hfill
-    \subfigure[Confusion matrix for the test set with data ten days ahead. The results worsen compared to the sets with ten and five days.]{\includegraphics[width=0.49\textwidth]{figures/matriz_10.png}}
+    \subfigure[Confusion matrix for the test set with data ten days ahead. The results worsen compared to the complete set and the set with five days.]{\includegraphics[width=0.49\textwidth]{figures/matriz_10.png}}
     \hfill
     \subfigure[Confusion matrix for the test set with data twenty days ahead. The network now confuses more classes with S-Like type objects.]{\includegraphics[width=0.49\textwidth]{figures/matriz_20.png}}
     \caption{}
