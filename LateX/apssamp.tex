@@ -23,7 +23,7 @@
 \usepackage{graphicx}% Include figure files
 \usepackage{dcolumn}% Align table columns on decimal point
 \usepackage{bm}% bold math
-\usepackage[portuguese]{babel}
+\usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{color,colortbl,multirow}
 \definecolor{Gray}{gray}{0.8}
@@ -69,9 +69,9 @@
 
 \begin{document}
 
-\preprint{APS/123-QED} %não sei oq faz
+\preprint{APS/123-QED} %not sure what this does
 
-\title{Classificação de curvas de luz de objetos transientes\\utilizando redes neurais LSTM}% Force line breaks with \\
+\title{Classification of transient object light curves\\using LSTM neural networks}% Force line breaks with \\
 
 \author{Marco Antônio Barroca$^{1}$, Mateus dos Santos$^{1}$, Rafael Santos Oliveira$^{2}$}
 
@@ -82,12 +82,12 @@
              %  but any date may be explicitly specified
 
 \begin{abstract}
-Uma das principais aplicações de IA na área científica é como classificador para experimentos que possuem uma alta quantidade de dados e exigem agilidade na análise. Nós implementamos uma rede neural LSTM para classificar dados de curvas de luz do experimento Large Synoptic Survey Telescope (LSST) como parte do The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC). Após simplificar o problemas para classes generalizadas nosso modelo mostrou-se capaz de classificar parcialmente os objetos astronômicos estudados.
+One of the main applications of AI in the scientific area is as a classifier for experiments that have a high amount of data and require agility in analysis. We implemented an LSTM neural network to classify light curve data from the Large Synoptic Survey Telescope (LSST) experiment as part of The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC). After simplifying the problem to generalized classes, our model proved capable of partially classifying the studied astronomical objects.
 
 
 \begin{description}
-\item[Estrutura]
-Fazemos em uma breve introdução de IAs, curvas de luz, redes LSTM e do problema de classificação a ser resolvido. Logo após, explicamos os métodos utilizados para simplificar o problema, pré-processar os dados e construir a rede. Em seguida, divulgamos e discutimos os resultados da classificação. Por último, apresentamos nossas conclusões.
+\item[Structure]
+We provide a brief introduction to AI, light curves, LSTM networks, and the classification problem to be solved. Next, we explain the methods used to simplify the problem, preprocess the data, and build the network. Then, we present and discuss the classification results. Finally, we present our conclusions.
 \end{description}
 
 \end{abstract}
@@ -98,27 +98,27 @@ Fazemos em uma breve introdução de IAs, curvas de luz, redes LSTM e do problem
 %\tableofcontents
 
 
-\section{Introdução}
-A inteligência artificial (IA), pode ser classificada como uma área de pesquisa que 
-investiga formas de habilitar o computador a realizar tarefas nas quais, até o 
-momento, o ser humano tem um melhor desempenho. A IA pode se manifestar de várias formas, em chatbots que podem entender os problemas dos clientes mais rapidamente e fornecer respostas mais eficientes, em assistentes inteligentes que precisam analisar informações críticas de grandes conjuntos de dados de texto livre e em aplicações científicas, como de classificar e tomar decisões na crescente exponencial de dados astronômicos.\cite{Djorgovski_2022}
+\section{Introduction}
+Artificial intelligence (AI) can be classified as a research area that 
+investigates ways to enable computers to perform tasks in which, until now, 
+humans have better performance. AI can manifest itself in various forms, in chatbots that can understand customer problems more quickly and provide more efficient responses, in intelligent assistants that need to analyze critical information from large free-text datasets, and in scientific applications, such as classifying and making decisions on the exponentially growing astronomical data.\cite{Djorgovski_2022}
 
-Recentemente o  Large Synoptic Survey Telescope (LSST), propôs um desafio no site Kaggle, um subsidiario da google, chamado The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC).\cite{kaggle} Trata-se de um desafio  com o intuito de classificar curvas de luz, dados do brilho observado de objetos celestes em função do tempo, os quais foram simuladas em preparação para observações do LSST. Essas curvas são capazes de revelar a presença de alguns fenômenos, como por exemplo, supernovas\cite{Russel_1912}. O LSST revolucionará nossa compreensão do céu, porém esse tipo de estudo é dificultado pelo grande volume de dados obtidos pelo telescópio, tornando indispensáveis procedimentos automáticos de análise para diferenciar e classificá-las. Neste desafio, foi colocado a questão: Quão bem podemos classificar objetos no céu que variam em brilho a partir de dados simulados de séries temporais LSST? A partir disso, surgiu a necessidade de um desafio de dados para ajudar a classificar essas fontes astronômicas e descrever o conjunto de dados PLAsTiCC e o desafio de dados Kaggle. \cite{PLAsTiCC}
-
-
-
-Antes da utilização de IA, esse tipo de classificação ainda dependia de uma análise manual. Utilizavam-se métodos estatísticos comuns como template fitting\cite{Tanvir_2005}, porém não escaláveis para um grande volume de dados. Geralmente um grupo de especialistas eliminava manualmente casos óbvios de falsos positivos, algo que por si só pode levar alguns dias. Dos dados restantes, cada caso deveria ser revisado por pelo menos três especialistas, o que pode levar a divergências sobre um caso particular, visto que os especialistas poderiam não possuir a mesma definição para classificação. Por essas razões, é necessário um sistema confiável que selecione repetidamente os candidatos mais importantes que serão revisados manualmente para confirmação em um estágio posterior.
+Recently, the Large Synoptic Survey Telescope (LSST) proposed a challenge on the Kaggle website, a Google subsidiary, called The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC).\cite{kaggle} This is a challenge aimed at classifying light curves, data of the observed brightness of celestial objects as a function of time, which were simulated in preparation for LSST observations. These curves are capable of revealing the presence of some phenomena, such as supernovae\cite{Russel_1912}. The LSST will revolutionize our understanding of the sky, however this type of study is hindered by the large volume of data obtained by the telescope, making automatic analysis procedures indispensable to differentiate and classify them. In this challenge, the question was raised: How well can we classify objects in the sky that vary in brightness from simulated LSST time-series data? From this, the need arose for a data challenge to help classify these astronomical sources and describe the PLAsTiCC dataset and the Kaggle data challenge. \cite{PLAsTiCC}
 
 
 
+Before the use of AI, this type of classification still depended on manual analysis. Common statistical methods such as template fitting\cite{Tanvir_2005} were used, but these are not scalable for a large volume of data. Usually, a group of experts manually eliminated obvious cases of false positives, something that by itself can take several days. Of the remaining data, each case should be reviewed by at least three experts, which can lead to disagreements about a particular case, since experts might not have the same definition for classification. For these reasons, a reliable system is necessary that repeatedly selects the most important candidates that will be manually reviewed for confirmation at a later stage.
 
-Devido ao fato da curva de luz, ser uma função que varia com o tempo, uma das formas possíveis de resolver o problema do PLAsTiCC, é utilizar uma Rede Neural Long short-term memory (LSTM). A LSTM é uma arquitetura de rede neural recorrente (RNN), desenvolvida por Hochreiter Schmidhuber em 1997, as redes recorrentes tem a característica de fazer que algumas informações em intervalos arbitrários persistam na rede através de um loop. A RNN por definição possui uma estrutura de repetição mais simples que as LSTMs, pois existe apenas uma única camada tanh, figura \ref{fig:RNN}, já as LSTMs, possui uma estrutura em cadeia que contém quatro camadas de redes neurais e diferentes blocos de memória chamados células como demonstrado na figura \ref{fig:lstm}. Sendo assim as LSTMs são bem adequada para classificar, processar e prever séries temporais com intervalos de tempo de duração desconhecida. \cite{Gabriel_2022}
+
+
+
+Since light curves are a function that varies with time, one of the possible ways to solve the PLAsTiCC problem is to use a Long Short-Term Memory (LSTM) Neural Network. The LSTM is a recurrent neural network (RNN) architecture, developed by Hochreiter and Schmidhuber in 1997. Recurrent networks have the characteristic of making some information persist in the network through a loop at arbitrary intervals. The RNN by definition has a simpler repetition structure than LSTMs, as there is only a single tanh layer, figure \ref{fig:RNN}, while LSTMs have a chain structure that contains four neural network layers and different memory blocks called cells as shown in figure \ref{fig:lstm}. Thus, LSTMs are well suited for classifying, processing, and predicting time series with time intervals of unknown duration. \cite{Gabriel_2022}
 
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=9.0cm]{figures/RNN.jpeg}
-        \caption{Funcionamento de uma rede RNN. \cite{colah}}
+        \caption{Functioning of an RNN network. \cite{colah}}
     \label{fig:RNN}
 \end{figure}
 
@@ -126,28 +126,28 @@ Devido ao fato da curva de luz, ser uma função que varia com o tempo, uma das 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=9.0cm]{figures/LSTM.jpeg}
-    \caption{funcionamento de uma rede LSTM. \cite{colah}}
+    \caption{Functioning of an LSTM network. \cite{colah}}
     \label{fig:lstm}
 \end{figure}
 
 
 
 
-\section{Metodologia}
+\section{Methodology}
 
-Os dados das curvas de luz foram obtidos através do LSST PLAsTiCC através do desafio no Kaggle\cite{kaggle}, para que o projeto fosse finalizado no tempo previsto da EAFEXP foi utilizado um recorte dos dados totais. Ao total foram utilizados dois conjunto de dados, o primeiro possuía 7848 objetos, sendo que 10$\%$ desses objetos foram usados para formar um conjunto de validação e o restante formou o conjunto de treino, o segundo conjunto de dados possuía 19920 objetos e foi utilizado como conjunto de teste.
+The light curve data were obtained through LSST PLAsTiCC via the Kaggle challenge\cite{kaggle}. In order to complete the project within the scheduled time of EAFEXP, a subset of the total data was used. In total, two datasets were used: the first had 7848 objects, of which 10$\%$ were used to form a validation set and the remainder formed the training set; the second dataset had 19920 objects and was used as the test set.
 
-Os dados são tabulares e consistem de informações de medida do fluxo, o erro da medição, o momento da medição em Data Juliana Modifica (mjd), o filtro utilizado (o espectro da emissão do objeto, ugriZY, representado por um valor numérico de zero à cinco), uma variável booleana (0 ou 1) que acusa a detecção ou não-detecção, a classe do objeto e um identificador único. Na Tabela \ref{tab:conjunto-dados-ex} é possível visualizar um exemplo.
+The data are tabular and consist of flux measurement information, measurement error, the measurement time in Modified Julian Date (mjd), the filter used (the object's emission spectrum, ugriZY, represented by a numerical value from zero to five), a boolean variable (0 or 1) that indicates detection or non-detection, the object class, and a unique identifier. An example can be seen in Table \ref{tab:conjunto-dados-ex}.
 
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{4pt}     % menos espaço entre colunas
+\setlength{\tabcolsep}{4pt}     % less space between columns
 \renewcommand{\arraystretch}{1.1}
-\footnotesize                   % texto menor (opcional)
-\resizebox{\columnwidth}{!}{%   % garante que cabe na coluna
+\footnotesize                   % smaller text (optional)
+\resizebox{\columnwidth}{!}{%   % ensures it fits in the column
 \begin{tabular}{|r|r|r|c|c|c|r|}
 \hline
-\textbf{Fluxo} & \textbf{Erro} & \textbf{mjd} & \textbf{Filtro} & \textbf{Detecção} & \textbf{Classe} & \textbf{Id} \\\hline
+\textbf{Flux} & \textbf{Error} & \textbf{mjd} & \textbf{Filter} & \textbf{Detection} & \textbf{Class} & \textbf{Id} \\\hline
 -544.810 & 3.623  & 59750.4 & 2 & 1 & 92 & 615 \\\hline
 -816.434 & 5.553  & 59750.4 & 1 & 1 & 88 & 713 \\\hline
 -471.386 & 3.802  & 59750.4 & 3 & 1 & 42 & 730 \\\hline
@@ -157,7 +157,7 @@ Os dados são tabulares e consistem de informações de medida do fluxo, o erro 
 -12.810  & 5.380  & 59798.4 & 5 & 0 & 92 & 117016 \\\hline
 ... & ... & ... & ... & ... & ... & ... \\\hline
 \end{tabular}}
-\caption{Tabela exemplificando o conjunto de dados.}
+\caption{Table exemplifying the dataset.}
 \label{tab:conjunto-dados-ex}
 \end{table}
 
@@ -166,9 +166,9 @@ Os dados são tabulares e consistem de informações de medida do fluxo, o erro 
 
 
 
-\subsection{Pré-processamento}
+\subsection{Preprocessing}
 
-A primeiro momento os dados disponibilizados possuíam catorze categorias, porém devido a discrepância entre a quantidade de dados por categoria os dados foram reorganizados em cinco categorias segundo a Tabela \ref{tab:classes-generalizadas}. Exemplos de cada uma das classes podem ser vistos na figura \ref{fig:curvas}. Pode-se ver na figura \ref{fig:classes} a distribuição pelas classes originais e pelas classes generalizadas.
+Initially, the provided data had fourteen categories, however due to the discrepancy in the amount of data per category, the data were reorganized into five categories according to Table \ref{tab:classes-generalizadas}. Examples of each of the classes can be seen in figure \ref{fig:curvas}. The distribution by original classes and generalized classes can be seen in figure \ref{fig:classes}.
 
 % in preamble (only if you want the grey header):
 % \usepackage[table]{xcolor}
@@ -181,7 +181,7 @@ A primeiro momento os dados disponibilizados possuíam catorze categorias, poré
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{|r|l|l|r|}
 \hline
-\rowcolor{gray!20}\textbf{Id} & \textbf{Classe original} & \textbf{Classe Generalizada} & \textbf{Novo Id} \\\hline
+\rowcolor{gray!20}\textbf{Id} & \textbf{Original Class} & \textbf{Generalized Class} & \textbf{New Id} \\\hline
 6  & Single micro-lens & Fast         & 1 \\\hline
 15 & TDE               & Long         & 2 \\\hline
 16 & Eclipsing Binary  & Periodic     & 3 \\\hline
@@ -197,7 +197,7 @@ A primeiro momento os dados disponibilizados possuíam catorze categorias, poré
 92 & RR lyrae          & Periodic     & 3 \\\hline
 95 & SLSN-I            & Long         & 2 \\\hline
 \end{tabular}}
-\caption{Tabela com as quatorze classes originais e suas classes generalizadas.}
+\caption{Table with the fourteen original classes and their generalized classes.}
 \label{tab:classes-generalizadas}
 \end{table}
 
@@ -205,80 +205,80 @@ A primeiro momento os dados disponibilizados possuíam catorze categorias, poré
 
 \begin{figure}[]
     \centering
-    \subfigure[Distribuição de medidas pelas classes originais.]{\includegraphics[width=6.7cm]{figures/14_classes_new.png}}
+    \subfigure[Distribution of measurements by original classes.]{\includegraphics[width=6.7cm]{figures/14_classes_new.png}}
     \hfill
-    \subfigure[Distribuição de medidas pelas classes generalizadas.]{\includegraphics[width=6.7cm]{figures/fig_1.png}}
+    \subfigure[Distribution of measurements by generalized classes.]{\includegraphics[width=6.7cm]{figures/fig_1.png}}
     \caption{}
     \label{fig:classes}
 \end{figure}
 \newpage
 
-Para realizar o treinamento da rede é preciso garantir que cada objeto possui o mesmo número de medidas, já que essa será a dimensão da entrada. Isso não é verdade para o este conjunto de dados, dessa forma, os dados com menor dimensão foram preenchidos com valores arbitrários, em um processo conhecido como preenchimento. É possível observar na figura \ref{fig:padding} que após o preenchimento todos os objetos passam a ter a mesma dimensão.
+To train the network, it is necessary to ensure that each object has the same number of measurements, since this will be the input dimension. This is not true for this dataset, so the data with smaller dimensions were filled with arbitrary values in a process known as padding. It can be observed in figure \ref{fig:padding} that after padding, all objects have the same dimension.
 
-Além disso as medidas temporais foram re-escaladas para que a primeira medida de um objeto fosse considerada como o zero na escala temporal e por último, os dados de fluxo precisaram ser normalizados para cada objeto separadamente visto que a amplitude das medidas entre objetos não é constante.
+In addition, the temporal measurements were rescaled so that the first measurement of an object was considered as zero on the temporal scale, and finally, the flux data needed to be normalized for each object separately since the amplitude of measurements between objects is not constant.
 
-Por último este projeto está interessado em verificar a capacidade de classificar objetos com apenas dados parciais da curva de luz, dessa forma foi selecionado dois novos conjuntos de teste, o qual os dados foram avançados no tempo em dez e vinte dias de observação a partir do momento em que cada objeto é detectado e posteriormente avaliou-se a rede com os conjuntos de cinco, dez e de vinte dias no futuro.
+Finally, this project is interested in verifying the ability to classify objects with only partial light curve data. For this purpose, two new test sets were selected, where the data were advanced in time by ten and twenty days of observation from the moment each object is detected, and subsequently the network was evaluated with sets of five, ten, and twenty days into the future.
 
 \begin{figure}[!h]
     \centering
-    \subfigure[Distribuição da quantidade de medidas por objeto.]{\includegraphics[width=.49\textwidth]{figures/fig_42.jpg}}
+    \subfigure[Distribution of the number of measurements per object.]{\includegraphics[width=.49\textwidth]{figures/fig_42.jpg}}
     \hfill
-    \subfigure[Distribuição da quantidade de medidas por objeto após o preenchimento.]{\includegraphics[width=.49\textwidth]{figures/fig_4.png}}
+    \subfigure[Distribution of the number of measurements per object after padding.]{\includegraphics[width=.49\textwidth]{figures/fig_4.png}}
     \caption{}
     \label{fig:padding}
 \end{figure}
 \newpage
 
-\subsection{Rede Neural}
+\subsection{Neural Network}
 
-Devido ao fato dos dados disponibilizados serem séries temporais optou-se pelo uso de uma rede LSTM. A rede será bidirecional pois as medidas anteriores são tão relevantes quanto as medidas posteriores. Decidiu-se também que cada uma das colunas no conjunto de dados exemplificado na tabela \ref{tab:conjunto de dados_ex} será tratada como uma característica do objeto.
+Since the provided data are time series, the use of an LSTM network was chosen. The network will be bidirectional because previous measurements are as relevant as subsequent measurements. It was also decided that each of the columns in the dataset exemplified in table \ref{tab:conjunto-dados-ex} will be treated as a feature of the object.
 
-Devido ao procedimento de preenchimento todos os objetos passaram a ter 352 medidas e 5 características, isso significa que as dimensões de entrada da rede será de 352x5 e a saída será uma distribuição de probabilidade em um tensor de tamanho cinco, pois temos 5 classes generalizadas.
+Due to the padding procedure, all objects came to have 352 measurements and 5 features. This means that the input dimensions of the network will be 352x5 and the output will be a probability distribution in a tensor of size five, since we have 5 generalized classes.
 
-Em virtude do preenchimento realizado é necessário ter uma camada de máscara de forma que os dados arbitrários sejam identificados e ignorados pela rede. Caso contrário eles seriam tratados com ruído no conjunto de dados.
+Due to the padding performed, it is necessary to have a mask layer so that the arbitrary data are identified and ignored by the network. Otherwise, they would be treated as noise in the dataset.
 
-Será necessário também o uso de uma camada densa para realizar processo de classificação e uma camada de GlobalMaxPooling para reduzir as dimensões do problema. A rede completa pode ser visualizada na figura \ref{fig:rede}.
+It will also be necessary to use a dense layer to perform the classification process and a GlobalMaxPooling layer to reduce the dimensions of the problem. The complete network can be visualized in figure \ref{fig:rede}.
 
 \begin{figure*}[]
     \centering
     \includegraphics[width=\textwidth]{figures/rede.png}
-    \caption{Rede neural utilizada no processo de classificação. A rede LSTM é bidirecional pois precisa-se dar igual importância a dados passados e futuros, a camada de Máscara serve para atenuar os efeitos de ruído que o preenchimento pode causar}
+    \caption{Neural network used in the classification process. The LSTM network is bidirectional because equal importance must be given to past and future data; the Mask layer serves to attenuate the noise effects that padding can cause}
     \label{fig:rede}
 \end{figure*}
 
 
-\section{Resultado e discussões}
+\section{Results and Discussion}
 
-As métricas escolhidas para a avaliação da rede foram as curvas ROC, Precision-Recall e uma matriz de confusão. Também foi verificada a performance da rede com dados parciais de uma curva de luz. Todas estas métricas foram construídas utilizando-se o conjunto de testes.
+The metrics chosen for network evaluation were ROC curves, Precision-Recall curves, and a confusion matrix. The network's performance with partial light curve data was also verified. All these metrics were constructed using the test set.
 
-As curvas ROC obtidas foram na sua maior parte excelentes, obtendo valores para a área abaixo da curva para as classes S-Like e Periodic de 0.95 e 0.99 respectivamente. O mesmo não pode ser dito da classe Long, para essa classe obteve-se o valor de 0.68. 
+The ROC curves obtained were mostly excellent, achieving area under the curve values for the S-Like and Periodic classes of 0.95 and 0.99, respectively. The same cannot be said for the Long class, for which a value of 0.68 was obtained. 
 
-De forma similar os valores alcançados para as curvas Precision-Recall referente as classes S-Like e Periodic, obtiveram altos valores para área abaixo da curva, 0.98 e 0.89 respectivamente. Para a classe Non-Periodic obteve-se o pior resultado de 0.40. Todas as curvas podem ser visualizadas na figura \ref{fig:RoC_Recall}.
+Similarly, the values achieved for the Precision-Recall curves for the S-Like and Periodic classes obtained high area under the curve values, 0.98 and 0.89, respectively. For the Non-Periodic class, the worst result of 0.40 was obtained. All curves can be visualized in figure \ref{fig:RoC_Recall}.
 
-Ao observar a matriz de confusão, facilita a compreensão do que está ocorrendo. A classificação de curvas S-Like é feita com alta acurácia e o modelo ainda é capaz de distinguir curvas das classes Periodic e Non-Periodic das outras três. Porém, percebe-se que o modelo falha completamente ao tentar classificar curvas do tipo Long ou Fast e também é incapaz de diferenciar curvas Periodic e Non-Periodic entre si. A matriz pode ser visualizada na figura \ref{fig:matrizes} (a).
+By observing the confusion matrix, it is easier to understand what is happening. The classification of S-Like curves is done with high accuracy, and the model is still capable of distinguishing curves from the Periodic and Non-Periodic classes from the other three. However, it can be seen that the model completely fails when trying to classify Long or Fast type curves and is also unable to differentiate Periodic and Non-Periodic curves from each other. The matrix can be visualized in figure \ref{fig:matrizes} (a).
 
 \begin{figure}[]
     \centering
-    \subfigure[Curva ROC para o nosso modelo de classificação. As classes Periodic e S-Like apresentam resultados satisfatórios, porém o mesmo não pode ser dito para as classes Fast e Long.]{\includegraphics[width=6.7cm]{figures/RoC.png}}
+    \subfigure[ROC curve for our classification model. The Periodic and S-Like classes show satisfactory results, however the same cannot be said for the Fast and Long classes.]{\includegraphics[width=6.7cm]{figures/RoC.png}}
     \hfill
-    \subfigure[Curva Precision Recall para o nosso modelo de classificação. As classes Periodic e S-Like apresentam resultados satisfatórios, porém percebemos que o modelo parece não classificar corretamente curvas Non-Periodic. ]{\includegraphics[width=6.7cm]{figures/Pre_Rec.png}}
+    \subfigure[Precision-Recall curve for our classification model. The Periodic and S-Like classes show satisfactory results, however we notice that the model does not seem to correctly classify Non-Periodic curves. ]{\includegraphics[width=6.7cm]{figures/Pre_Rec.png}}
     \caption{}
     \label{fig:RoC_Recall}
 \end{figure}
 
 
-Como mencionado anteriormente, é necessário avaliar a rede em 
-conjuntos de teste que foram avançados no tempo, neste casso foi avaliado em cinco, dez e vinte dias. Assim é possível perceber que a matriz de confusão apresenta piores resultados a medida que o conjunto de testes é avançado no tempo e mesmo com cinco dias de avanço, a rede é incapaz de classificar os objetos com uma performance similar a do conjunto completo e passa a confundir todos os objeto com a classe S-like. Na figura \ref{fig:matrizes} (b), (c) e (d) possui-se as matrizes de confusão para os diferentes conjuntos de teste.
+As mentioned earlier, it is necessary to evaluate the network on 
+test sets that were advanced in time; in this case, it was evaluated at five, ten, and twenty days. Thus, it is possible to see that the confusion matrix shows worse results as the test set is advanced in time, and even with five days of advance, the network is unable to classify objects with performance similar to the complete set and begins to confuse all objects with the S-Like class. In figure \ref{fig:matrizes} (b), (c), and (d), the confusion matrices for the different test sets are shown.
 
 \begin{figure*}[!h]
     \centering
-    \subfigure[Matriz de confusão para o conjunto de testes completo.]{\includegraphics[width=\columnwidth]{figures/matriz.png}}
+    \subfigure[Confusion matrix for the complete test set.]{\includegraphics[width=\columnwidth]{figures/matriz.png}}
     \hfill
-    \subfigure[Matriz de confusão para o conjunto de testes com cinco dias a frente. Os resultados pioram em relação ao conjunto de testes completo.]{\includegraphics[width=\columnwidth]{figures/matrix_5.png}}
+    \subfigure[Confusion matrix for the test set with five days ahead. The results worsen compared to the complete test set.]{\includegraphics[width=\columnwidth]{figures/matrix_5.png}}
     \hfill
-    \subfigure[Matriz de confusão para o conjunto de testes com dados dez dias a frente. Os resultados pioram em relação ao conjunto de dez e cinco dias.]{\includegraphics[width=\columnwidth]{figures/matriz_10.png}}
+    \subfigure[Confusion matrix for the test set with data ten days ahead. The results worsen compared to the sets with ten and five days.]{\includegraphics[width=\columnwidth]{figures/matriz_10.png}}
     \hfill
-    \subfigure[Matriz de confusão para o conjunto de testes com dados vinte dias a frente. A rede agora confunde mais classes com objetos do tipo S-Like.]{\includegraphics[width=\columnwidth]{figures/matriz_20.png}}
+    \subfigure[Confusion matrix for the test set with data twenty days ahead. The network now confuses more classes with S-Like type objects.]{\includegraphics[width=\columnwidth]{figures/matriz_20.png}}
     \caption{}
     \label{fig:matrizes}
 \end{figure*}
@@ -291,39 +291,39 @@ conjuntos de teste que foram avançados no tempo, neste casso foi avaliado em ci
 
 %curva roc, Precision Recall, matrix de confusão, com os dados avançando no tempo. 
 
-\section{Conclusão}
+\section{Conclusion}
 
-A rede neural desenvolvida neste projeto, foi capaz de classificar objetos S-Like e ainda distinguir objetos Periodic e Non-Periodics dos demais. Infelizmente esses resultados não se repetem para as classes Fast e Long provavelmente pela difícil caracterização dessas curvas que possuem picos de pouca duração somente no inicio ou no fim da medida.
+The neural network developed in this project was able to classify S-Like objects and still distinguish Periodic and Non-Periodic objects from the others. Unfortunately, these results do not repeat for the Fast and Long classes, probably due to the difficult characterization of these curves that have short-duration peaks only at the beginning or end of the measurement.
 
-Outro problema que este modelo apresenta é que não é possível distinguir de forma eficaz objetos Non-Periodic confundindo-os com objetos Periodic. Provavelmente esse resultado vem do fato que ambas as curvas apresentam vários picos ao longo da medida e o modelo parece atribuir periodicidade a medidas que não são periódicas, apesar disso a rede quase não identifica medidas periódicas como não-periódicas.
+Another problem that this model presents is that it is not possible to effectively distinguish Non-Periodic objects, confusing them with Periodic objects. This result probably comes from the fact that both curves show several peaks throughout the measurement, and the model seems to attribute periodicity to measurements that are not periodic. Despite this, the network almost never identifies periodic measurements as non-periodic.
 
-Por último, infelizmente esta rede perde a capacidade de classificar qualquer objeto quando é fornecido dados parciais das curvas de luz e passa a confundir todos os objetos como se fossem S-Like. Isso deve vir do fato que o conjunto de dados mesmo com as classes generalizadas ainda apresenta uma grande prevalência da classe S-Like. Também é perceptível a confusão da rede para classificar objetos não periódicos, reconhecendo-os como periódicos.
+Finally, unfortunately, this network loses the ability to classify any object when partial light curve data are provided and begins to confuse all objects as if they were S-Like. This is likely due to the fact that the dataset, even with generalized classes, still shows a high prevalence of the S-Like class. The network's confusion in classifying non-periodic objects, recognizing them as periodic, is also noticeable.
 
-Como sugestão para corrigir esses problemas pode-se pensar em escolher um conjunto de treino que esteja mais equilibrado na sua distribuição de classes. A inclusão de mais objetos do tipo Non-Periodic no conjunto de treinamento da rede pode ser suficiente para reduzir a confusão com a classe Periodic. 
+As a suggestion to correct these problems, one could consider choosing a training set that is more balanced in its class distribution. Including more Non-Periodic type objects in the network training set may be sufficient to reduce confusion with the Periodic class. 
 
 
-Durante a produção deste trabalho, uma das soluções tentadas para minimizar o problema do desbalanceamento entre as classes, foi a utilização de pesos durante o treinamento da rede, porém esta técnica não apresentou uma melhoria que fosse significativa para classificação.
+During the production of this work, one of the solutions attempted to minimize the class imbalance problem was the use of weights during network training; however, this technique did not show a significant improvement for classification.
 
-Quanto a resolver a questão de classificação de objetos Fast e Long, talvez seja necessário uma mudança no pré-processamento dos dados. Pode-se por exemplo, extrair dos dados os momentos em que a variável de detecção booleana tem valor 1 e utilizar somente esses pedaços das curvas de luz. Dessa forma estaria removendo dados de fundo do objeto e mantendo somente as medidas correspondentes a detecções. Isso também poderia auxiliar a questão de classificação com dados parciais das curvas.
+Regarding solving the classification issue for Fast and Long objects, it may be necessary to change the data preprocessing. For example, one could extract from the data the moments when the boolean detection variable has value 1 and use only those portions of the light curves. In this way, background data from the object would be removed, keeping only the measurements corresponding to detections. This could also help with the issue of classification with partial curve data.
 
 \begin{figure*}[]
     \centering
-    \subfigure[Exemplo da curva de luz de um objeto da classe S-like. Os valores na legenda indicam o filtro utilizado e o espectro da emissão.]{\includegraphics[width=\columnwidth]{figures/S_like_ex.png}}
+    \subfigure[Example of a light curve of an object from the S-Like class. The values in the legend indicate the filter used and the emission spectrum.]{\includegraphics[width=\columnwidth]{figures/S_like_ex.png}}
     \hfill
-    \subfigure[Exemplo da curva de luz de um objeto da classe Fast. Os valores na legenda indicam o filtro utilizado e o espectro da emissão.]{\includegraphics[width=\columnwidth]{figures/Fast_ex.png}}
+    \subfigure[Example of a light curve of an object from the Fast class. The values in the legend indicate the filter used and the emission spectrum.]{\includegraphics[width=\columnwidth]{figures/Fast_ex.png}}
     \hfill
-    \subfigure[Exemplo da curva de luz de um objeto da classe Long. Os valores na legenda indicam o filtro utilizado e o espectro da emissão.]{\includegraphics[width=\columnwidth]{figures/Long_ex.png}}
+    \subfigure[Example of a light curve of an object from the Long class. The values in the legend indicate the filter used and the emission spectrum.]{\includegraphics[width=\columnwidth]{figures/Long_ex.png}}
     \hfill
-    \subfigure[Exemplo da curva de luz de um objeto da classe Periodic. Os valores na legenda indicam o filtro utilizado e o espectro da emissão.]{\includegraphics[width=\columnwidth]{figures/Periodic_ex.png}}
+    \subfigure[Example of a light curve of an object from the Periodic class. The values in the legend indicate the filter used and the emission spectrum.]{\includegraphics[width=\columnwidth]{figures/Periodic_ex.png}}
     \hfill
-    \subfigure[Exemplo da curva de luz de um objeto da classe Non-Periodic. Os valores na legenda indicam o filtro utilizado e o espectro da emissão.]{\includegraphics[width=\columnwidth]{figures/Non_periodic_ex.png}}
+    \subfigure[Example of a light curve of an object from the Non-Periodic class. The values in the legend indicate the filter used and the emission spectrum.]{\includegraphics[width=\columnwidth]{figures/Non_periodic_ex.png}}
     \caption{}
     \label{fig:curvas}
 \end{figure*}
 
-\section{Código}
+\section{Code}
 
-Todo código utilizado e o modelo treinado para reproduzir esses resultados está disponível em um repositório público no GitHub no link \url{https://github.com/MarcoBarroca/VI_EAFEXP_Proj3}.
+All code used and the trained model to reproduce these results are available in a public repository on GitHub at the link \url{https://github.com/MarcoBarroca/VI_EAFEXP_Proj3}.
 
 
 
@@ -337,18 +337,18 @@ Todo código utilizado e o modelo treinado para reproduzir esses resultados est�
 % most likely will not want to use it.
 \nocite{*}
 \begin{acknowledgements}
-Gostaríamos de agradecer a coordenação da EAFEXP, os professores Clécio R. de Bom, Elisangela L. Faria, Ana Paula O. Muller e Marcelo Portes de Albuquerque e os monitores Gabriel Teixeira e Bernardo M. Fraga pelas palestras, aulas e auxilio no projeto.
+We would like to thank the EAFEXP coordination, professors Clécio R. de Bom, Elisangela L. Faria, Ana Paula O. Muller and Marcelo Portes de Albuquerque, and the teaching assistants Gabriel Teixeira and Bernardo M. Fraga for the lectures, classes, and assistance with the project.
 \end{acknowledgements}
 \clearpage
 \appendix
-\section{Curvas ROC e Precision Recall para dados de 5, 10 e 20 dias}
+\section{ROC and Precision-Recall Curves for 5, 10, and 20 Day Data}
 
-Caso seja de interesse do leitor seguem as curvas ROC e Precision Recall nas figuras \ref{fig:roc e precision_5}, \ref{fig:roc e precision_10} e \ref{fig:roc e precision_20} para os conjuntos de teste de 5, 10 e 20 dias.
+If it is of interest to the reader, the ROC and Precision-Recall curves are shown in figures \ref{fig:roc e precision_5}, \ref{fig:roc e precision_10}, and \ref{fig:roc e precision_20} for the test sets of 5, 10, and 20 days.
 
 \begin{figure}[!h]
-    \subfigure[Curva Precision Recall para o conjunto de dados com um avanço temporal de 5 dias.]{\includegraphics[width=0.5\textwidth]{figures/precision_5dias.png}}
+    \subfigure[Precision-Recall curve for the dataset with a temporal advance of 5 days.]{\includegraphics[width=0.5\textwidth]{figures/precision_5dias.png}}
     \hfill
-    \subfigure[Curva ROC para o conjunto de dados com um avanço temporal de 5 dias.]{\includegraphics[width=0.5\textwidth]{figures/roc_5dias.png}}
+    \subfigure[ROC curve for the dataset with a temporal advance of 5 days.]{\includegraphics[width=0.5\textwidth]{figures/roc_5dias.png}}
     \caption{}
     \label{fig:roc e precision_5}
 \end{figure}
@@ -357,18 +357,18 @@ Caso seja de interesse do leitor seguem as curvas ROC e Precision Recall nas fig
 
 \begin{figure}[!h]
     \centering
-    \subfigure[Curva Precision Recall para o conjunto de dados com um avanço temporal de 10 dias.]{\includegraphics[width=0.5\textwidth]{figures/precision_10dias.png}}
+    \subfigure[Precision-Recall curve for the dataset with a temporal advance of 10 days.]{\includegraphics[width=0.5\textwidth]{figures/precision_10dias.png}}
     \hfill
-    \subfigure[Curva ROC para o conjunto de dados com um avanço temporal de 10 dias.]{\includegraphics[width=0.5\textwidth]{figures/roc_10dias.png}}
+    \subfigure[ROC curve for the dataset with a temporal advance of 10 days.]{\includegraphics[width=0.5\textwidth]{figures/roc_10dias.png}}
     \caption{}
     \label{fig:roc e precision_10}
 \end{figure}
 \newpage
 
 \begin{figure}[]
-    \subfigure[Curva Precision Recall para o conjunto de dados com um avanço temporal de 20 dias.]{\includegraphics[width=0.5\textwidth]{figures/precision_20dias.png}}
+    \subfigure[Precision-Recall curve for the dataset with a temporal advance of 20 days.]{\includegraphics[width=0.5\textwidth]{figures/precision_20dias.png}}
     \hfill
-    \subfigure[Curva ROC para o conjunto de dados com um avanço temporal de 20 dias.]{\includegraphics[width=0.5\textwidth]{figures/roc_20dias.png}}
+    \subfigure[ROC curve for the dataset with a temporal advance of 20 days.]{\includegraphics[width=0.5\textwidth]{figures/roc_20dias.png}}
     \caption{}
     \label{fig:roc e precision_20}
 \end{figure}
