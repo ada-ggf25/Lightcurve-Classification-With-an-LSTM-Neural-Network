@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex apssamp"] 1763042574 "apssamp.aux" "apssamp.bbl" "apssamp" 1763042582
+["bibtex apssamp"] 1763043180 "apssamp.aux" "apssamp.bbl" "apssamp" 1763043187
   "/usr/share/texlive/texmf-dist/bibtex/bst/revtex/apsrev4-2.bst" 1601932770 69609 e9dea59f0e753ccda3ddc8f5806d846d ""
-  "apssamp.aux" 1763042581 11077 4a23c1486a25dceb54b9369d69b7de2f "pdflatex"
+  "apssamp.aux" 1763043187 11187 c9313bb6538d1078a9afa513d7d088b8 "pdflatex"
   "apssamp.bib" 1763042556 3664 a65ed9e0609f33307d52d064124d0d85 ""
-  "apssampNotes.bib" 1763042575 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "apssampNotes.bib" 1763043181 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "apssamp.bbl"
   "apssamp.blg"
-["pdflatex"] 1763042575 "/home/guilhermegrancho/CBPF/Lightcurve-Classification-With-an-LSTM-Neural-Network/LateX/apssamp.tex" "apssamp.pdf" "apssamp" 1763042582
+["pdflatex"] 1763043180 "/home/guilhermegrancho/CBPF/Lightcurve-Classification-With-an-LSTM-Neural-Network/LateX/apssamp.tex" "apssamp.pdf" "apssamp" 1763043187
   "/etc/texmf/web2c/texmf.cnf" 1744990057 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/guilhermegrancho/CBPF/Lightcurve-Classification-With-an-LSTM-Neural-Network/LateX/apssamp.tex" 1763042557 22719 1c547b2a019fc76a05e1649e514e8bac ""
+  "/home/guilhermegrancho/CBPF/Lightcurve-Classification-With-an-LSTM-Neural-Network/LateX/apssamp.tex" 1763042672 22740 c38148dad5a14ed497179aaf522b6a58 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1246382020 1120 1e8878807317373affa7f7bba4cf2f6a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1246382020 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -140,10 +140,10 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1745074210 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1745074304 2801420 5c9a8cfe2f067650c7add3f75f12d143 ""
-  "apssamp.aux" 1763042581 11077 4a23c1486a25dceb54b9369d69b7de2f "pdflatex"
-  "apssamp.bbl" 1763042575 7954 983d31021006529393ca87be5604e8e7 "bibtex apssamp"
-  "apssamp.out" 1763042581 1959 7b70fd2aff6f8111454a8cdd1cc03444 "pdflatex"
-  "apssamp.tex" 1763042557 22719 1c547b2a019fc76a05e1649e514e8bac ""
+  "apssamp.aux" 1763043187 11187 c9313bb6538d1078a9afa513d7d088b8 "pdflatex"
+  "apssamp.bbl" 1763043180 7954 983d31021006529393ca87be5604e8e7 "bibtex apssamp"
+  "apssamp.out" 1763043187 2065 f38a666ea09623049e318429715c8ef6 "pdflatex"
+  "apssamp.tex" 1763042672 22740 c38148dad5a14ed497179aaf522b6a58 ""
   "figures/14_classes_new.png" 1762978841 48335 81ec804a5cef76bd4e41493525a34ea7 ""
   "figures/Fast_ex.png" 1762978841 115108 79ecd1651a3d5d62e27a0cbd5399242f ""
   "figures/LSTM.jpeg" 1762978841 29779 7bd6212f57ae43dbe78bf1257e6b5e1f ""
