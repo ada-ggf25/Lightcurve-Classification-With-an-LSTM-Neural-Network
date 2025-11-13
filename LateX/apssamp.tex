@@ -130,12 +130,13 @@ The light curve data were obtained through LSST PLAsTiCC via the Kaggle challeng
 
 The data are tabular and consist of flux measurement information, measurement error, the measurement time in Modified Julian Date (mjd), the filter used (the object's emission spectrum, ugriZY, represented by a numerical value from zero to five), a boolean variable (0 or 1) that indicates detection or non-detection, the object class, and a unique identifier. An example can be seen in Table \ref{tab:conjunto-dados-ex}.
 
-\begin{table}[ht]
+\begin{center}
+\begin{minipage}{\columnwidth}
 \centering
-\setlength{\tabcolsep}{4pt}     % less space between columns
+\setlength{\tabcolsep}{2pt}     % less space between columns
 \renewcommand{\arraystretch}{1.1}
 \footnotesize                   % smaller text (optional)
-\resizebox{\columnwidth}{!}{%   % ensures it fits in the column
+\resizebox{\textwidth}{!}{%   % ensures it fits in the column
 \begin{tabular}{|r|r|r|c|c|c|r|}
 \hline
 \textbf{Flux} & \textbf{Error} & \textbf{mjd} & \textbf{Filter} & \textbf{Detection} & \textbf{Class} & \textbf{Id} \\\hline
@@ -148,20 +149,22 @@ The data are tabular and consist of flux measurement information, measurement er
 -12.810  & 5.380  & 59798.4 & 5 & 0 & 92 & 117016 \\\hline
 ... & ... & ... & ... & ... & ... & ... \\\hline
 \end{tabular}}
-\caption{Table exemplifying the dataset.}
+\captionof{table}{Table exemplifying the dataset.}
 \label{tab:conjunto-dados-ex}
-\end{table}
+\end{minipage}
+\end{center}
 
 \subsection{Preprocessing}
 
 Initially, the provided data had fourteen categories, however due to the discrepancy in the amount of data per category, the data were reorganized into five categories according to Table \ref{tab:classes-generalizadas}. Examples of each of the classes can be seen in figure \ref{fig:curvas}. The distribution by original classes and generalized classes can be seen in figure \ref{fig:classes}.
 
-\begin{table}[ht]
+\begin{center}
+\begin{minipage}{\columnwidth}
 \centering
-\setlength{\tabcolsep}{4pt}
+\setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.1}
 \footnotesize
-\resizebox{\columnwidth}{!}{%
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|r|l|l|r|}
 \hline
 \rowcolor{gray!20}\textbf{Id} & \textbf{Original Class} & \textbf{Generalized Class} & \textbf{New Id} \\\hline
@@ -180,9 +183,10 @@ Initially, the provided data had fourteen categories, however due to the discrep
 92 & RR lyrae          & Periodic     & 3 \\\hline
 95 & SLSN-I            & Long         & 2 \\\hline
 \end{tabular}}
-\caption{Table with the fourteen original classes and their generalized classes.}
+\captionof{table}{Table with the fourteen original classes and their generalized classes.}
 \label{tab:classes-generalizadas}
-\end{table}
+\end{minipage}
+\end{center}
 
 \begin{figure*}[ht]
     \centering
