@@ -87,7 +87,7 @@ Fernandes, G.G.D.$^{1,3}$; Barroca, M.A.$^1$; dos Santos, M.$^1$; Oliveira, R.S.
 \begin{abstract}
 
 \vspace{-3mm}
-\noindent One of the main applications of artificial intelligence (AI) in the scientific area is as a classifier for experiments that have a high amount of data and require agility in analysis. We implemented a Long Short-Term Memory (LSTM) neural network to classify light curve data from the Large Synoptic Survey Telescope (LSST) experiment as part of The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC). The original dataset contained fourteen object classes, which were reorganized into five generalized categories due to class imbalance. After preprocessing the data, including padding, temporal rescaling, and flux normalization, we trained a bidirectional LSTM network with masking layers to handle variable-length sequences. Our model achieved excellent performance for S-Like and Periodic classes, with area under the ROC curve values of 0.95 and 0.99, respectively, and area under the Precision-Recall curve values of 0.98 and 0.89. However, the model struggled with Fast and Long classes and had difficulty distinguishing between Periodic and Non-Periodic objects. When evaluated on partial light curve data (5, 10, and 20 days ahead), the model's performance degraded significantly, primarily misclassifying objects as S-Like. These results suggest that class balancing and improved preprocessing strategies, such as focusing on detection moments, could enhance the model's classification capabilities.
+\noindent One of the main applications of artificial intelligence (AI) in scientific research is as a classifier for experiments that generate large volumes of data and require rapid analysis. We implemented a Long Short-Term Memory (LSTM) neural network to classify light curve data from the Large Synoptic Survey Telescope (LSST) experiment as part of The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC). The original dataset contained fourteen object classes, which were reorganized into five generalized categories due to class imbalance. After preprocessing the data, including padding, temporal rescaling, and flux normalization, we trained a bidirectional LSTM network with masking layers to handle variable-length sequences. Our model achieved excellent performance for S-Like and Periodic classes, with area under the ROC curve values of 0.95 and 0.99, respectively, and area under the Precision-Recall curve values of 0.98 and 0.89. However, the model struggled with Fast and Long classes and had difficulty distinguishing between Periodic and Non-Periodic objects. When evaluated on partial light curve data (5, 10, and 20 days ahead), the model's performance degraded significantly, primarily misclassifying objects as S-Like. These results suggest that class balancing and improved preprocessing strategies, such as focusing on detection moments, could enhance the model's classification capabilities.
 \end{abstract}
 
 
@@ -96,11 +96,9 @@ Fernandes, G.G.D.$^{1,3}$; Barroca, M.A.$^1$; dos Santos, M.$^1$; Oliveira, R.S.
 \begin{multicols}{2} % Two-column layout throughout the main article text
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-Artificial intelligence (AI) can be classified as a research area that 
-investigates ways to enable computers to perform tasks in which, until now, 
-humans have better performance. AI can manifest itself in various forms, in chatbots that can understand customer problems more quickly and provide more efficient responses, in intelligent assistants that need to analyze critical information from large free-text datasets, and in scientific applications, such as classifying and making decisions on the exponentially growing astronomical data.\cite{Djorgovski_2022}
+Artificial intelligence (AI) has become increasingly important in scientific research, particularly for analyzing large-scale datasets that exceed human processing capabilities. In astronomy, the exponential growth of observational data from modern telescopes requires automated classification systems to identify and categorize celestial objects efficiently.\cite{Djorgovski_2022} Machine learning approaches, particularly deep neural networks, have shown great promise in handling such classification tasks.
 
-Recently, the Large Synoptic Survey Telescope (LSST) proposed a challenge on Kaggle, a Google subsidiary website, called The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC).\cite{kaggle} This is a challenge aimed at classifying light curves, data of the observed brightness of celestial objects as a function of time, which were simulated in preparation for LSST observations. These curves are capable of revealing the presence of some phenomena, such as supernovae\cite{Russel_1912}. The LSST will revolutionize our understanding of the sky, however, this type of study is hindered by the large volume of data obtained by the telescope, making automatic analysis procedures indispensable to differentiate and classify them. In this challenge, the question was raised: How well can we classify objects in the sky that vary in brightness from simulated LSST time-series data? From this, the need arose for a data challenge to help classify these astronomical sources and describe the PLAsTiCC dataset and the Kaggle data challenge. \cite{PLAsTiCC}
+Recently, the Large Synoptic Survey Telescope (LSST) proposed a challenge on Kaggle, a Google subsidiary website, called The Photometric LSST Astronomical Time-series Classification Challenge (PLAsTiCC).\cite{kaggle} This challenge is aimed at classifying light curves, data of the observed brightness of celestial objects as a function of time, which were simulated in preparation for LSST observations. These curves are capable of revealing the presence of some phenomena, such as supernovae\cite{Russel_1912}. The LSST will revolutionize our understanding of the sky, however, this type of study is hindered by the large volume of data obtained by the telescope, making automatic analysis procedures indispensable to differentiate and classify them. In this challenge, the question was raised: How well can we classify objects in the sky that vary in brightness from simulated LSST time-series data? The PLAsTiCC dataset and challenge were created to help classify these astronomical sources. \cite{PLAsTiCC}
 
 Before the use of AI, this type of classification still depended on manual analysis. Common statistical methods such as template fitting\cite{Tanvir_2005} were used, but these are not scalable for a large volume of data. Usually, a group of experts manually eliminated obvious cases of false positives, something that by itself can take several days. Of the remaining data, each case should be reviewed by at least three experts, which can lead to disagreements about a particular case, since experts might not have the same definition for classification. For these reasons, a reliable system is necessary that repeatedly selects the most important candidates that will be manually reviewed for confirmation at a later stage.
 
@@ -108,7 +106,7 @@ Before the use of AI, this type of classification still depended on manual analy
 
 \subsection{Long Short-Term Memory Neural Networks}
 
-Since light curves are a function that varies with time, one of the possible ways to solve the PLAsTiCC problem is to use a Long Short-Term Memory (LSTM) Neural Network. The LSTM is a recurrent neural network (RNN) architecture, developed by Hochreiter and Schmidhuber in 1997. Recurrent networks have the characteristic of making some information persist in the network through a loop at arbitrary intervals. The RNN by definition has a simpler repetition structure than LSTMs, as there is only a single tanh layer, as shown in figure \ref{fig:RNN}, while LSTMs have a chain structure that contains four neural network layers and different memory blocks called cells as shown in figure \ref{fig:lstm}. Thus, LSTMs are well suited for classifying, processing, and predicting time series with time intervals of unknown duration. \cite{Gabriel_2022}
+Since light curves are a function that varies with time, one possible way to solve the PLAsTiCC problem is to use a Long Short-Term Memory (LSTM) Neural Network. The LSTM is a recurrent neural network (RNN) architecture, developed by Hochreiter and Schmidhuber in 1997. Recurrent networks have the characteristic of making some information persist in the network through a loop at arbitrary intervals. The RNN by definition has a simpler repetition structure than LSTMs, as there is only a single tanh layer, as shown in figure \ref{fig:RNN}, while LSTMs have a chain structure that contains four neural network layers and different memory blocks called cells as shown in figure \ref{fig:lstm}. Thus, LSTMs are well suited for classifying, processing, and predicting time series with time intervals of unknown duration. \cite{Gabriel_2022}
 
 \begin{figure*}[ht]
     \centering
@@ -126,9 +124,9 @@ Since light curves are a function that varies with time, one of the possible way
 
 \section{Materials and Methods}
 
-The light curve data were obtained through LSST PLAsTiCC via the Kaggle challenge\cite{kaggle}. In order to complete the project within the scheduled time of EAFEXP, a subset of the total data was used. In total, two datasets were used: the first had 7848 objects, of which 10$\%$ were used to form a validation set and the remainder formed the training set; the second dataset had 19920 objects and was used as the test set.
+The light curve data were obtained through LSST PLAsTiCC via the Kaggle challenge\cite{kaggle}. To complete the project within the scheduled time of EAFEXP, a subset of the total data was used. In total, two datasets were used: the first had 7848 objects, of which 10$\%$ were used to form a validation set and the remainder formed the training set; the second dataset had 19920 objects and was used as the test set.
 
-The data are tabular and consist of flux measurement information, measurement error, the measurement time in Modified Julian Date (mjd), the filter used (the object's emission spectrum, ugriZY, represented by a numerical value from zero to five), a boolean variable (0 or 1) that indicates detection or non-detection, the object class, and a unique identifier. An example can be seen in Table \ref{tab:conjunto-dados-ex}.
+The data are in tabular format and consist of flux measurement information, measurement error, the measurement time in Modified Julian Date (mjd), the filter used (the object's emission spectrum, ugriZY, represented by a numerical value from zero to five), a boolean variable (0 or 1) that indicates detection or non-detection, the object class, and a unique identifier. An example can be seen in Table \ref{tab:conjunto-dados-ex}.
 
 \begin{center}
 \begin{minipage}{\columnwidth}
@@ -197,9 +195,9 @@ Initially, the provided data had fourteen categories, however, due to the discre
     \label{fig:classes}
 \end{figure*}
 
-To train the network, it is necessary to ensure that each object has the same number of measurements, since this will be the input dimension. This is not true for this dataset, so the data with smaller dimensions were filled with arbitrary values in a process known as padding. It can be observed in figure \ref{fig:padding} that after padding, all objects have the same dimension.
+To train the network, it is necessary to ensure that each object has the same number of measurements, since this will be the input dimension. This is not true for this dataset, so the data with smaller dimensions were filled with arbitrary values in a process known as padding. As shown in figure \ref{fig:padding}, after padding, all objects have the same dimension.
 
-In addition, the temporal measurements were rescaled so that the first measurement of an object was considered as zero on the temporal scale, and finally, the flux data needed to be normalized for each object separately since the amplitude of measurements between objects is not constant.
+In addition, the temporal measurements were rescaled so that the first measurement of each object was set to zero on the temporal scale. Finally, the flux data were normalized for each object separately using min-max normalization, scaling values to the range [0,1], since the amplitude of measurements varies significantly between objects.
 
 Finally, this project is interested in verifying the ability to classify objects with only partial light curve data. For this purpose, two new test sets were selected, where the data were advanced in time by ten and twenty days of observation from the moment each object is detected, and subsequently the network was evaluated with sets of five, ten, and twenty days into the future.
 
@@ -214,13 +212,13 @@ Finally, this project is interested in verifying the ability to classify objects
 
 \subsection{Neural Network}
 
-Since the provided data are time series, the use of an LSTM network was chosen. The network will be bidirectional because previous measurements are as relevant as subsequent measurements. It was also decided that each of the columns in the dataset exemplified in Table \ref{tab:conjunto-dados-ex} will be treated as a feature of the object.
+Since the provided data are time series, an LSTM network was chosen for its ability to capture temporal dependencies. The network is bidirectional to capture both forward and backward temporal patterns, as both previous and subsequent measurements are relevant for classification. Each column in the dataset (Table \ref{tab:conjunto-dados-ex}) was treated as a feature, resulting in five input features: flux, error, modified Julian date, filter, and detection.
 
-Due to the padding procedure, all objects came to have 352 measurements and 5 features. This means that the input dimensions of the network will be 352x5 and the output will be a probability distribution in a tensor of size five, since we have 5 generalized classes.
+Due to the padding procedure, all objects have 352 measurements and 5 features. The network input dimensions are therefore 352$\times$5, and the output is a probability distribution over the five generalized classes.
 
-Due to the padding performed, it is necessary to have a mask layer so that the arbitrary data are identified and ignored by the network. Otherwise, they would be treated as noise in the dataset.
+A masking layer was implemented to identify and ignore padded values, preventing them from being treated as noise. A GlobalMaxPooling layer was used to reduce the temporal dimensions by extracting the maximum value across the sequence, which helps capture the most significant features regardless of their temporal position. Finally, a dense layer with softmax activation performs the final classification. The complete network architecture can be visualized in figure \ref{fig:rede}.
 
-It will also be necessary to use a dense layer to perform the classification process and a GlobalMaxPooling layer to reduce the dimensions of the problem. The complete network can be visualized in figure \ref{fig:rede}.
+The network was trained using the Adam optimizer with categorical cross-entropy as the loss function. Training was performed with early stopping based on validation loss to prevent overfitting. The model was trained for a maximum of 50 epochs with a batch size of 32.
 
 \begin{figure*}[ht]
     \centering
@@ -233,13 +231,13 @@ All code used and the trained model to reproduce these results are available in 
 
 \section{Results and Discussion}
 
-The metrics chosen for network evaluation were ROC curves, Precision-Recall curves, and a confusion matrix. The network's performance with partial light curve data was also verified. All these metrics were constructed using the test set.
+\subsection{Performance on Complete Light Curves}
 
-The ROC curves obtained were mostly excellent, achieving area under the curve values for the S-Like and Periodic classes of 0.95 and 0.99, respectively. The same cannot be said for the Long class, for which a value of 0.68 was obtained. 
+The network was evaluated using ROC curves, Precision-Recall curves, and confusion matrices, all constructed from the test set. The ROC curves showed excellent performance for the S-Like and Periodic classes, achieving area under the curve (AUC) values of 0.95 and 0.99, respectively. However, the Long class achieved a significantly lower AUC of 0.68, indicating poor performance for this category.
 
-Similarly, the values achieved for the Precision-Recall curves for the S-Like and Periodic classes obtained high area under the curve values, 0.98 and 0.89, respectively. For the Non-Periodic class, the worst result of 0.40 was obtained. All curves can be visualized in figure \ref{fig:RoC_Recall}.
+Similarly, the Precision-Recall curves for the S-Like and Periodic classes achieved high AUC values of 0.98 and 0.89, respectively. The Non-Periodic class showed the worst performance with an AUC of 0.40. All curves can be visualized in figure \ref{fig:RoC_Recall}.
 
-By observing the confusion matrix, it is easier to understand what is happening. The classification of S-Like curves is done with high accuracy, and the model is still capable of distinguishing curves from the Periodic and Non-Periodic classes from the other three. However, it can be seen that the model completely fails when trying to classify Long or Fast type curves and is also unable to differentiate Periodic and Non-Periodic curves from each other. The matrix can be visualized in figure \ref{fig:matrizes} (a).
+Analysis of the confusion matrix (figure \ref{fig:matrizes} (a)) reveals several important patterns. The classification of S-Like curves achieves high accuracy, and the model successfully distinguishes Periodic and Non-Periodic classes from the other three categories. However, the model struggles significantly with Long and Fast type curves, showing poor classification performance. Additionally, the model has difficulty differentiating between Periodic and Non-Periodic objects, often confusing one for the other.
 
 \begin{figure*}[ht]
     \centering
@@ -250,8 +248,9 @@ By observing the confusion matrix, it is easier to understand what is happening.
     \label{fig:RoC_Recall}
 \end{figure*}
 
-As mentioned earlier, it is necessary to evaluate the network on 
-test sets that were advanced in time; in this case, it was evaluated at five, ten, and twenty days. Thus, it is possible to see that the confusion matrix shows worse results as the test set is advanced in time, and even with five days of advance, the network is unable to classify objects with performance similar to the complete set and begins to confuse all objects with the S-Like class. In figure \ref{fig:matrizes} (b), (c), and (d), the confusion matrices for the different test sets are shown.
+\subsection{Performance on Partial Light Curves}
+
+To assess the model's ability to classify objects early in their light curve evolution, the network was evaluated on test sets with temporal advances of 5, 10, and 20 days from the detection moment. The results show a significant degradation in performance as the temporal advance increases. Even with only 5 days of advance, the network fails to achieve performance comparable to the complete dataset and begins to misclassify most objects as S-Like. This degradation becomes more pronounced with longer temporal advances, as shown in the confusion matrices in figure \ref{fig:matrizes} (b), (c), and (d). The ROC and Precision-Recall curves for these partial datasets are provided in the Appendix (figures \ref{fig:roc e precision_5}, \ref{fig:roc e precision_10}, and \ref{fig:roc e precision_20}).
 
 \begin{figure*}[ht]
     \centering
@@ -283,21 +282,17 @@ test sets that were advanced in time; in this case, it was evaluated at five, te
 
 \section{Conclusion}
 
-The neural network developed in this project was able to classify S-Like objects and still distinguish Periodic and Non-Periodic objects from the others. Unfortunately, these results do not repeat for the Fast and Long classes, probably due to the difficult characterization of these curves that have short-duration peaks only at the beginning or end of the measurement.
+This work presents a bidirectional LSTM neural network for classifying transient astronomical object light curves from the PLAsTiCC dataset. The model achieved strong performance for S-Like and Periodic classes, with ROC AUC values of 0.95 and 0.99, respectively, demonstrating the effectiveness of LSTM networks for time-series classification in astronomy.
 
-Another problem that this model presents is that it is not possible to effectively distinguish Non-Periodic objects, confusing them with Periodic objects. This result probably comes from the fact that both curves show several peaks throughout the measurement, and the model seems to attribute periodicity to measurements that are not periodic. Despite this, the network almost never identifies periodic measurements as non-periodic.
+However, several limitations were identified. The model struggled significantly with Fast and Long classes, likely due to their characteristic short-duration peaks that occur only at the beginning or end of measurements, making them difficult to capture with the current approach. Additionally, the model had difficulty distinguishing between Periodic and Non-Periodic objects, often misclassifying Non-Periodic as Periodic, though the reverse error was rare. This suggests that both classes exhibit similar peak patterns, leading the model to incorrectly attribute periodicity to non-periodic signals.
 
-Finally, unfortunately, this network loses the ability to classify any object when partial light curve data are provided and begins to confuse all objects as if they were S-Like. This is likely due to the fact that the dataset, even with generalized classes, still shows a high prevalence of the S-Like class. The network's confusion in classifying non-periodic objects, recognizing them as periodic, is also noticeable.
+The model's performance degraded substantially when evaluated on partial light curve data, with even 5-day advances causing significant misclassification, primarily toward the S-Like class. This degradation is likely due to the class imbalance in the dataset, where S-Like objects dominate the training distribution.
 
-As a suggestion to correct these problems, one could consider choosing a training set that is more balanced in its class distribution. Including more Non-Periodic type objects in the network training set may be sufficient to reduce confusion with the Periodic class. 
-
-During the production of this work, one of the solutions attempted to minimize the class imbalance problem was the use of weights during network training; however, this technique did not show a significant improvement for classification.
-
-Regarding solving the classification issue for Fast and Long objects, it may be necessary to change the data preprocessing. For example, one could extract from the data the moments when the boolean detection variable has value 1 and use only those portions of the light curves. In this way, background data from the object would be removed, keeping only the measurements corresponding to detections. This could also help with the issue of classification with partial curve data.
+Several approaches could address these limitations. First, class balancing through oversampling underrepresented classes or using more sophisticated class weighting schemes could improve performance on minority classes. Second, preprocessing strategies that focus on detection moments (using only data where the detection variable equals 1) could help capture the characteristic features of Fast and Long objects while reducing background noise. Third, alternative architectures such as attention mechanisms or transformer networks might better capture long-range dependencies and distinguish periodic from non-periodic patterns. During this work, class weighting was attempted but did not yield significant improvements, suggesting that more substantial architectural or preprocessing changes may be necessary.
 
 \section{Acknowledgements} 
 
-We would like to thank the EAFEXP coordination, professors Clécio R. de Bom, Elisangela L. Faria, Ana Paula O. Muller and Marcelo Portes de Albuquerque, and the teaching assistants Gabriel Teixeira and Bernardo M. Fraga for the lectures, classes, and assistance with the project.
+We would like to thank the EAFEXP coordination, professors Clécio R. de Bom, Elisangela L. Faria, Ana Paula O. Muller, and Marcelo Portes de Albuquerque, and the teaching assistants Gabriel Teixeira and Bernardo M. Fraga for the lectures, classes, and assistance with the project.
 
 \begin{thebibliography}{99}
 
