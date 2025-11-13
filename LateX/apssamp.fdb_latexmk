@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1763044783 "/home/guilhermegrancho/CBPF/Lightcurve-Classification-With-an-LSTM-Neural-Network/LateX/apssamp.tex" "apssamp.pdf" "apssamp" 1763044791
+["pdflatex"] 1763045771 "/home/guilhermegrancho/CBPF/Lightcurve-Classification-With-an-LSTM-Neural-Network/LateX/apssamp.tex" "apssamp.pdf" "apssamp" 1763045780
   "/etc/texmf/web2c/texmf.cnf" 1744990057 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/guilhermegrancho/CBPF/Lightcurve-Classification-With-an-LSTM-Neural-Network/LateX/apssamp.tex" 1763044788 25514 6b925f69997892d0b2b6914073ce18a2 ""
+  "/home/guilhermegrancho/CBPF/Lightcurve-Classification-With-an-LSTM-Neural-Network/LateX/apssamp.tex" 1763045767 25477 1e08242da64829062d710c8b87a6c884 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -122,9 +122,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1745074210 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1745074304 2801420 5c9a8cfe2f067650c7add3f75f12d143 ""
-  "apssamp.aux" 1763044791 9907 7f9339cc5869c54631fb2c2fc67ceeca "pdflatex"
-  "apssamp.out" 1763044791 1659 4b9e2300838ac91e710466c828da076c "pdflatex"
-  "apssamp.tex" 1763044788 25514 6b925f69997892d0b2b6914073ce18a2 ""
+  "apssamp.aux" 1763045780 9857 37aa4d52e394a792e8a7f657f3bb3dcd "pdflatex"
+  "apssamp.out" 1763045780 1379 66dd7d734b05eeb4b46c5d54d6ebc33b "pdflatex"
+  "apssamp.tex" 1763045767 25477 1e08242da64829062d710c8b87a6c884 ""
   "figures/14_classes_new.png" 1762978841 48335 81ec804a5cef76bd4e41493525a34ea7 ""
   "figures/Fast_ex.png" 1762978841 115108 79ecd1651a3d5d62e27a0cbd5399242f ""
   "figures/LSTM.jpeg" 1762978841 29779 7bd6212f57ae43dbe78bf1257e6b5e1f ""
